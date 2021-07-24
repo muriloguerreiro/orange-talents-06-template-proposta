@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
@@ -22,6 +23,12 @@ public class ValidationErrorHandler {
     @Autowired
     public ValidationErrorHandler(MessageSource messageSource) {
         this.messageSource = messageSource;
+    }
+
+    @ExceptionHandler(ApiErrorException.class)
+    public ResponseEntity<?> handleUnprocessableEntityException(ApiErrorException exception){
+
+        return ResponseEntity.status(exception.getHttpStatus()).body(exception.getReason());
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)

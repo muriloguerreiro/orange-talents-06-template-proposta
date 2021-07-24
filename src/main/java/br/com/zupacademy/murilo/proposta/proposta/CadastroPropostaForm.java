@@ -8,11 +8,13 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
 import br.com.zupacademy.murilo.proposta.config.validacao.anotacoes.CpfCnpj;
+import br.com.zupacademy.murilo.proposta.config.validacao.anotacoes.ValorUnico;
 
 public class CadastroPropostaForm {
 	
 	@NotBlank 
 	@CpfCnpj
+	@ValorUnico(domainClass = Proposta.class, fieldName = "documento")
     private String documento;
 	
 	@NotBlank 
