@@ -10,7 +10,6 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.util.Assert;
-import org.springframework.web.server.ResponseStatusException;
 
 import br.com.zupacademy.murilo.proposta.config.validacao.anotacoes.ValorUnico;
 import br.com.zupacademy.murilo.proposta.config.validacao.exceptions.ApiErrorException;
