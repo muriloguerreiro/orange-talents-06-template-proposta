@@ -2,14 +2,12 @@ package br.com.zupacademy.murilo.proposta.proposta;
 
 import java.math.BigDecimal;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -17,8 +15,6 @@ import javax.validation.constraints.PositiveOrZero;
 
 import org.springframework.util.Assert;
 
-import br.com.zupacademy.murilo.proposta.associacao.AssociacaoDto;
-import br.com.zupacademy.murilo.proposta.associacao.Cartao;
 import br.com.zupacademy.murilo.proposta.config.validacao.anotacoes.CpfCnpj;
 import br.com.zupacademy.murilo.proposta.solicitacao.StatusAnalise;
 import br.com.zupacademy.murilo.proposta.solicitacao.StatusProposta;
@@ -50,9 +46,6 @@ public class Proposta {
 	
 	@Enumerated(EnumType.STRING)
 	private StatusProposta status;
-	
-	@OneToOne(cascade = CascadeType.PERSIST)
-	private Cartao cartao;
 
 	@Deprecated
 	public Proposta() {
@@ -93,16 +86,6 @@ public class Proposta {
 			this.status = StatusProposta.NAO_ELEGIVEL;
 		}
 
-	}
-	
-	/**
-	 * Método que associa o cartao a Proposta após chamar o serviço de associacao.
-	 * @param associacaoDto deve ser um objeto não nulo recebido do serviço externo
-	 */
-	
-	public void associaCartao(AssociacaoDto associacaoDto) {
-		Cartao cartao = associacaoDto.converter(this);
-		this.cartao = cartao;
 	}
 
 }
