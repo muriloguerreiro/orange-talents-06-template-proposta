@@ -62,6 +62,22 @@ services:
       KEYCLOAK_PASSWORD: Pa55w0rd
       POSTGRES_PORT_5432_TCP_ADDR: 127.0.0.1
 
+  proposta:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    image: muriloguerreiro/proposta
+    container_name: proposta
+    ports:
+      - 8081:8080
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/proposta
+      SPRING_DATASOURCE_USERNAME: keycloak
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_PROFILES_ACTIVE: prod
+    depends_on:
+      - postgres
+
   analise:
     image: 'zupacademy/analise-financeira'
     ports:
