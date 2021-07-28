@@ -49,4 +49,16 @@ public class Cartao {
 		this.proposta = proposta;
 	}
 
+	public LocalDateTime getEmitidoEm() {
+		return emitidoEm;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public BigDecimal getLimite() {
+		return limite;
+	}
+
 }

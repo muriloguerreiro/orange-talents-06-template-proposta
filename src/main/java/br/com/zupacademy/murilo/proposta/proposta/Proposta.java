@@ -79,6 +79,26 @@ public class Proposta {
 		return nome;
 	}
 	
+	public String getEmail() {
+		return email;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public BigDecimal getSalario() {
+		return salario;
+	}
+
+	public StatusProposta getStatus() {
+		return status;
+	}
+
+	public Cartao getCartao() {
+		return cartao;
+	}
+
 	/**
 	 * Método que atualiza o status da Proposta após chamar o serviço de analise.
 	 * @param statusAnalise não pode ser nulo
