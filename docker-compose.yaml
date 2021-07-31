@@ -38,7 +38,7 @@ services:
     image: jboss/keycloak
     ports:
       - 18443:8443
-      - 18080:8080
+      - 8080:8080
       - 19990:9990
     depends_on:
       # Just a delay to wait for postgres! This is not recommended!
@@ -61,6 +61,7 @@ services:
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: Pa55w0rd
       POSTGRES_PORT_5432_TCP_ADDR: 127.0.0.1
+      KEYCLOAK_FRONTEND_URL: http://keycloak:8080/auth
 
   proposta:
     build:
@@ -75,6 +76,8 @@ services:
       SPRING_DATASOURCE_USERNAME: keycloak
       SPRING_DATASOURCE_PASSWORD: password
       SPRING_PROFILES_ACTIVE: prod
+      KEYCLOAK_ISSUER_URI: http://keycloak:8080/auth/realms/proposta
+      KEYCLOAK_JWKS_URI: http://keycloak:8080/auth/realms/proposta/protocol/openid-connect/certs
     depends_on:
       - postgres
 
