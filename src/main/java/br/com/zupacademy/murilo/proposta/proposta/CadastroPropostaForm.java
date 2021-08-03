@@ -30,6 +30,10 @@ public class CadastroPropostaForm {
     @NotNull 
     @PositiveOrZero
     private BigDecimal salario;
+    
+    @Deprecated
+	public CadastroPropostaForm() {
+	}
 
 	public CadastroPropostaForm(@NotBlank String documento, @NotBlank @Email String email, @NotBlank String nome,
 			@NotBlank String endereco, @NotNull @PositiveOrZero BigDecimal salario) {
@@ -40,6 +44,26 @@ public class CadastroPropostaForm {
 		this.salario = salario;
 	}
 	
+	public String getDocumento() {
+		return documento;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public BigDecimal getSalario() {
+		return salario;
+	}
+
 	/**
 	 * Método que converte os dados recebidos para a classe Proposta.
 	 * @param documento é obrigatório e deve ser um CPF ou CNPJ válido.
