@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.zupacademy.murilo.proposta.associacao.Cartao;
 import br.com.zupacademy.murilo.proposta.biometria.CartaoRepository;
 import br.com.zupacademy.murilo.proposta.config.validacao.exceptions.ApiErrorException;
+import br.com.zupacademy.murilo.proposta.notificacao.NotificacaoBloqueioService;
+import br.com.zupacademy.murilo.proposta.notificacao.NotificacaoForm;
 
 
 @RestController
@@ -28,6 +30,9 @@ public class BloqueioController {
 	
 	@Autowired
 	private BloqueioRepository bloqueioRepository;
+	
+	@Autowired
+	private NotificacaoBloqueioService notificacaoService;
 
 	@PostMapping("/cartaoId={id}")
 	@Transactional
@@ -47,6 +52,9 @@ public class BloqueioController {
 		if (cartao.getStatus() == StatusCartao.BLOQUEADO) {
 			throw new ApiErrorException(HttpStatus.UNPROCESSABLE_ENTITY, "Cartão já está bloqueado");
 		}
+		
+		NotificacaoForm notificacaoForm = new NotificacaoForm("API de Proposta");
+		notificacaoService.notificar(cartao.getNumero(),notificacaoForm);
 		
 		cartao.solicitaBloqueio(ip,userAgent,bloqueioRepository);
 		cartaoRepository.save(cartao);
